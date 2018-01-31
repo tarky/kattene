@@ -2,7 +2,7 @@
 /*
 Plugin Name: Kattene
 Author: webfood
-Plugin URI: https://github.com/megumiteam/staticpress-s3
+Plugin URI: https://github.com/tarky/kattene
 Description: kattene.
 Version: 0.1
 Author URI: http://webfood.info/
