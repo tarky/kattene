@@ -29,6 +29,7 @@ License:
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
 function kattene_func( $args, $content ) {
   $content = str_replace("<br />", "", $content);
   $arr = json_decode($content,true);
@@ -68,23 +69,38 @@ function kattene_func( $args, $content ) {
   $str .= '</div>
     </div>
   </div>';
-	$path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
-  $str .= '<script>
-    var cb = function() {
-			var links = document.querySelectorAll(\'link[href="'.$path.'style.css"]\');
-			if(links.length == 0){
-        var l = document.createElement("link"); l.rel = "stylesheet";
-        l.href = "'.$path.'style.css";
-        var h = document.getElementsByTagName("head")[0]; h.parentNode.insertBefore(l, h);
-			}
-    };
-    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-        webkitRequestAnimationFrame || msRequestAnimationFrame;
-    if (raf) raf(cb);
-    else window.addEventListener("load", cb);
-  </script>';
+  $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
+  wp_enqueue_style( 'kattene', $path . 'style.css');
 
+  add_action( 'wp_footer', 'kattene_script' );
   return $str;
 }
 
 add_shortcode( 'kattene', 'kattene_func' );
+
+function kattene_script() {
+  echo <<< EOM
+<script>
+ var loadDeferredStyles = function() {
+   var addStylesNode = document.getElementById("deferred-kattene");
+   var replacement = document.createElement("div");
+   replacement.innerHTML = addStylesNode.textContent;
+   document.body.appendChild(replacement)
+   addStylesNode.parentElement.removeChild(addStylesNode);
+ };
+ var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+     window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+ if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+ else window.addEventListener('load', loadDeferredStyles);
+</script>
+EOM;
+}
+
+function add_noscript_to_kattene( $tag, $handle ) {
+  if ( 'kattene' !== $handle ) {
+      return $tag;
+  }
+  $tag = str_replace( '<link', '<noscript id="deferred-kattene"><link', $tag );
+  return str_replace( '/>', '/></noscript>', $tag );
+}
+add_filter( 'style_loader_tag', 'add_noscript_to_kattene', 10, 2 );
