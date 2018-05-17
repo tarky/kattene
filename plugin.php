@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: https://github.com/tarky/kattene
 Description: kattene.
-Version: 0.1
+Version: 0.2
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -35,11 +35,13 @@ function kattene_func( $args, $content ) {
   $arr = json_decode($content,true);
   $sites = $arr["sites"];
 
-  $main = array_filter($sites,
+  $main_tmp = array_filter($sites,
     function($site){
       return $site["main"];
     }
-  )[0];
+  );
+
+  $main = $main_tmp[0];
 
   $cnt = count($sites);
 
