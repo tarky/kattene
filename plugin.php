@@ -106,4 +106,4 @@ function add_noscript_to_kattene( $tag, $handle ) {
   return str_replace( '/>', '/></noscript>', $tag );
 }
 add_filter( 'style_loader_tag', 'add_noscript_to_kattene', 10, 2 );
-add_filter( 'run_wptexturize', '__return_false' );
+remove_filter('the_content', 'wptexturize');
