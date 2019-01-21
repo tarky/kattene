@@ -123,7 +123,7 @@
 
   .kattene__btn:hover, .kattene__btn:focus {
     background-color: #439aa7;
-    color: #fff; }
+    color: #fff !important; }
 
   .kattene__btn:disabled {
     cursor: not-allowed;
