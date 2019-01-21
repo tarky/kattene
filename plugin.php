@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: https://github.com/tarky/kattene
 Description: kattene.
-Version: 0.2
+Version: 0.3
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -64,7 +64,7 @@ function kattene_func( $args, $content ) {
       ';
 
   for( $i=0 ; $i<$cnt ; $i++ ){
-     $str .= '<div><a class="btn __'.$sites[$i]["color"].'" target="_blank" href="'.$sites[$i]["url"].'">'.$sites[$i]["label"].'</a></div>
+     $str .= '<div><a class="kattene__btn __'.$sites[$i]["color"].'" target="_blank" href="'.$sites[$i]["url"].'">'.$sites[$i]["label"].'</a></div>
   ';
   }
 
@@ -106,3 +106,4 @@ function add_noscript_to_kattene( $tag, $handle ) {
   return str_replace( '/>', '/></noscript>', $tag );
 }
 add_filter( 'style_loader_tag', 'add_noscript_to_kattene', 10, 2 );
+add_filter( 'run_wptexturize', '__return_false' );

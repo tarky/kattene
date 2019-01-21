@@ -33,7 +33,7 @@
     float: left;
     margin-bottom: 5px; }
 
-  .kattene__btns .btn {
+  .kattene__btns .kattene__btn {
     width: 100%;
     padding-left: 0;
     padding-right: 0;
@@ -101,7 +101,7 @@
       width: 49.5%;
       float: right; } }
 
-.btn {
+.kattene__btn {
   appearance: none;
   background-color: #54c0d1;
   border: 0;
@@ -121,22 +121,22 @@
   vertical-align: middle;
   white-space: nowrap; }
 
-  .btn:hover, .btn:focus {
+  .kattene__btn:hover, .kattene__btn:focus {
     background-color: #439aa7;
     color: #fff; }
 
-  .btn:disabled {
+  .kattene__btn:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
 
-    .btn:disabled:hover {
+    .kattene__btn:disabled:hover {
       background-color: #54c0d1; }
 
-.btn.__small {
+.kattene__btn.__small {
   padding: 0.55em;
   font-size: 0.9em; }
 
-.btn.__orange {
+.kattene__btn.__orange {
   background-color: #FF9901;
   -webkit-box-shadow: 0 5px 0 #cc7a01;
   -moz-box-shadow: 0 5px 0 #cc7a01;
@@ -147,18 +147,18 @@
   border-radius: 3px;
   text-align: center; }
 
-  .btn.__orange:hover {
+  .kattene__btn.__orange:hover {
     background-color: #cc7a01; }
 
-  .btn.__orange i {
+  .kattene__btn.__orange i {
     font-weight: bold; }
 
-    .btn.__orange i:before {
+    .kattene__btn.__orange i:before {
       vertical-align: middle;
       font-size: 1.2em;
       margin-right: 0.2em; }
 
-.btn.__blue {
+.kattene__btn.__blue {
   background-color: #007dcd;
   -webkit-box-shadow: 0 5px 0 #0064a4;
   -moz-box-shadow: 0 5px 0 #0064a4;
@@ -169,18 +169,18 @@
   border-radius: 3px;
   text-align: center; }
 
-  .btn.__blue:hover {
+  .kattene__btn.__blue:hover {
     background-color: #0064a4; }
 
-  .btn.__blue i {
+  .kattene__btn.__blue i {
     font-weight: bold; }
 
-    .btn.__blue i:before {
+    .kattene__btn.__blue i:before {
       vertical-align: middle;
       font-size: 1.2em;
       margin-right: 0.2em; }
 
-.btn.__red {
+.kattene__btn.__red {
   background-color: #c20004;
   -webkit-box-shadow: 0 5px 0 #9b0003;
   -moz-box-shadow: 0 5px 0 #9b0003;
@@ -191,18 +191,18 @@
   border-radius: 3px;
   text-align: center; }
 
-  .btn.__red:hover {
+  .kattene__btn.__red:hover {
     background-color: #9b0003; }
 
-  .btn.__red i {
+  .kattene__btn.__red i {
     font-weight: bold; }
 
-    .btn.__red i:before {
+    .kattene__btn.__red i:before {
       vertical-align: middle;
       font-size: 1.2em;
       margin-right: 0.2em; }
 
-.btn.__green {
+.kattene__btn.__green {
   background-color: #0BBD80;
   -webkit-box-shadow: 0 5px 0 #099766;
   -moz-box-shadow: 0 5px 0 #099766;
@@ -213,13 +213,13 @@
   border-radius: 3px;
   text-align: center; }
 
-  .btn.__green:hover {
+  .kattene__btn.__green:hover {
     background-color: #099766; }
 
-  .btn.__green i {
+  .kattene__btn.__green i {
     font-weight: bold; }
 
-    .btn.__green i:before {
+    .kattene__btn.__green i:before {
       vertical-align: middle;
       font-size: 1.2em;
       margin-right: 0.2em; }
