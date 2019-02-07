@@ -52,6 +52,13 @@
       margin-right: 1%; }
 
 @media screen and (max-width: 900px) {
+  .kattene__btns.__five > div {
+  width: 49.5%; }
+  .kattene__btns.__five > div:nth-child(odd) {
+    margin-right: 1%; }
+  .kattene__btns.__five > div:last-child {
+    margin-right: 0;
+    float: right; }
 
   .kattene__btns.__four > div {
     width: 49.5%; }
@@ -84,6 +91,12 @@
     bottom: 0;
     box-sizing: border-box;
     padding-right: 10px; }
+
+  .kattene__btns.__five > div {
+    width: 19.2%; }
+
+    .kattene__btns.__five > div:not(:last-child) {
+      margin-right: 1%; }
 
     .kattene__btns.__four > div {
       width: 24.25%; }
@@ -220,6 +233,28 @@
     font-weight: bold; }
 
     .kattene__btn.__green i:before {
+      vertical-align: middle;
+      font-size: 1.2em;
+      margin-right: 0.2em; }
+
+.kattene__btn.__pink {
+  background-color: #e1325b;
+  -webkit-box-shadow: 0 5px 0 #b42849;
+  -moz-box-shadow: 0 5px 0 #b42849;
+  box-shadow: 0 5px 0 #b42849;
+  -o-box-shadow: 0 5px 0 #b42849;
+  -ms-box-shadow: 0 5px 0 #b42849;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  text-align: center; }
+
+  .kattene__btn.__pink:hover {
+    background-color: #b42849; }
+
+  .kattene__btn.__pink i {
+    font-weight: bold; }
+
+    .kattene__btn.__pink i:before {
       vertical-align: middle;
       font-size: 1.2em;
       margin-right: 0.2em; }

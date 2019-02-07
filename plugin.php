@@ -53,6 +53,8 @@ function kattene_func( $args, $content ) {
       $num_class = "__three";
   elseif ($cnt == 4):
       $num_class = "__four";
+  elseif ($cnt == 5):
+      $num_class = "__five";
   endif;
 
   $str = '<div class="kattene">
