@@ -5,6 +5,10 @@
   margin-bottom: 1em;
   box-sizing: border-box; }
 
+.kattene div{
+  margin: 0;
+}
+
 .kattene__imgpart {
   text-align: center; }
 
@@ -19,7 +23,7 @@
 .kattene__description {
   font-size: 0.8em; }
 
-.kattene__btns {
+.kattene .kattene__btns {
   width: 100%;
   margin-top: 1.2em; }
 
