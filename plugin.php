@@ -73,7 +73,7 @@ function kattene_func( $args, $content ) {
   $str .= '</div>
     </div>
   </div>';
-  $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
+  $path = str_replace(site_url(),'',plugin_dir_url( __FILE__ ));
   wp_enqueue_style( 'kattene', $path . 'style.css');
 
   add_action( 'wp_footer', 'kattene_script' );
