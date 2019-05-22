@@ -41,7 +41,7 @@ function kattene_func( $args, $content ) {
     }
   );
 
-  $main = $main_tmp[0];
+  $main = array_pop($main_tmp);
 
   $cnt = count($sites);
 
