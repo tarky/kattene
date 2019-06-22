@@ -89,7 +89,7 @@ function kattene_script() {
  var loadDeferredStyles = function() {
    var addStylesNodes = document.getElementsByClassName("deferred-kattene");
    var replacement = document.createElement("div");
-
+   
    addStylesNodes = Array.prototype.slice.call(addStylesNodes);
    addStylesNodes.forEach(function(elm) {
      replacement.innerHTML += elm.textContent;
