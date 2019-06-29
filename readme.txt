@@ -10,7 +10,7 @@ Requires PHP: 7.0
 
 == Description ==
 
-You can create a blog part which have multiple links to pages about a single product you want to introduce to your readers by putting a simple shortcode in your article.
+You can create a blog part which has multiple links to pages about a single product you want to introduce to your readers by putting a simple shortcode in your article.
 
 In detail, check out [this page](http://webfood.info/make-kattene/).
 

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Kattene
 Author: webfood
-Plugin URI: https://github.com/tarky/kattene
+Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
 Version: 1.0
 Author URI: http://webfood.info/
