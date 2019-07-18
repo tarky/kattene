@@ -2,9 +2,9 @@
 /*
 Plugin Name: Kattene
 Author: webfood
-Plugin URI: https://github.com/tarky/kattene
+Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
-Version: 0.5
+Version: 1.0
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -41,7 +41,7 @@ function kattene_func( $args, $content ) {
     }
   );
 
-  $main = $main_tmp[0];
+  $main = array_pop($main_tmp);
 
   $cnt = count($sites);
 
@@ -77,6 +77,7 @@ function kattene_func( $args, $content ) {
   wp_enqueue_style( 'kattene', $path . 'style.css');
 
   add_action( 'wp_footer', 'kattene_script' );
+  do_action( 'kattene' );
   return $str;
 }
 
@@ -86,11 +87,15 @@ function kattene_script() {
   echo <<< EOM
 <script>
  var loadDeferredStyles = function() {
-   var addStylesNode = document.getElementById("deferred-kattene");
+   var addStylesNodes = document.getElementsByClassName("deferred-kattene");
    var replacement = document.createElement("div");
-   replacement.innerHTML = addStylesNode.textContent;
-   document.body.appendChild(replacement)
-   addStylesNode.parentElement.removeChild(addStylesNode);
+   
+   addStylesNodes = Array.prototype.slice.call(addStylesNodes);
+   addStylesNodes.forEach(function(elm) {
+     replacement.innerHTML += elm.textContent;
+     elm.parentElement.removeChild(elm);
+   });
+   document.body.appendChild(replacement);
  };
  var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -101,11 +106,12 @@ EOM;
 }
 
 function add_noscript_to_kattene( $tag, $handle ) {
-  if ( 'kattene' !== $handle ) {
+  if ( !in_array( $handle , [ 'kattene', 'kattene-custom' ], true ) ) {
       return $tag;
   }
-  $tag = str_replace( '<link', '<noscript id="deferred-kattene"><link', $tag );
+  $tag = str_replace( '<link', '<noscript class="deferred-kattene"><link', $tag );
   return str_replace( '/>', '/></noscript>', $tag );
 }
 add_filter( 'style_loader_tag', 'add_noscript_to_kattene', 10, 2 );
+
 remove_filter('the_content', 'wptexturize');
