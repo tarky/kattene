@@ -91,6 +91,10 @@
     padding-left: 10px;
     width: 80%; }
 
+  .kattene .kattene__description {
+    margin-bottom: 4em;
+  }
+
   .kattene__btns {
     position: absolute;
     bottom: 0;

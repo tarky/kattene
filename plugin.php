@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
-Version: 1.0
+Version: 1.1
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -89,7 +89,7 @@ function kattene_script() {
  var loadDeferredStyles = function() {
    var addStylesNodes = document.getElementsByClassName("deferred-kattene");
    var replacement = document.createElement("div");
-   
+
    addStylesNodes = Array.prototype.slice.call(addStylesNodes);
    addStylesNodes.forEach(function(elm) {
      replacement.innerHTML += elm.textContent;
