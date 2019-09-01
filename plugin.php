@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
-Version: 1.0
+Version: 1.2
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -62,18 +62,14 @@ function kattene_func( $args, $content ) {
     <div class="kattene__infopart">
       <div class="kattene__title"><a target="_blank" href="'.$main["url"].'">'.$arr["title"].'</a></div>
       <div class="kattene__description">'.$arr["description"].'</div>
-      <div class="kattene__btns '.$num_class.'">
-      ';
+      <div class="kattene__btns '.$num_class.'">';
 
   for( $i=0 ; $i<$cnt ; $i++ ){
-     $str .= '<div><a class="kattene__btn __'.$sites[$i]["color"].'" target="_blank" href="'.$sites[$i]["url"].'">'.$sites[$i]["label"].'</a></div>
-  ';
+     $str .= '<div><a class="kattene__btn __'.$sites[$i]["color"].'" target="_blank" href="'.$sites[$i]["url"].'">'.$sites[$i]["label"].'</a></div>';
   }
 
-  $str .= '</div>
-    </div>
-  </div>';
-  $path = str_replace(site_url(),'',plugin_dir_url( __FILE__ ));
+  $str .= '</div></div></div>';
+  $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
   wp_enqueue_style( 'kattene', $path . 'style.css');
 
   add_action( 'wp_footer', 'kattene_script' );
@@ -89,7 +85,7 @@ function kattene_script() {
  var loadDeferredStyles = function() {
    var addStylesNodes = document.getElementsByClassName("deferred-kattene");
    var replacement = document.createElement("div");
-   
+
    addStylesNodes = Array.prototype.slice.call(addStylesNodes);
    addStylesNodes.forEach(function(elm) {
      replacement.innerHTML += elm.textContent;
