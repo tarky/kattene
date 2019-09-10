@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
-Version: 1.2
+Version: 1.3
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -13,7 +13,7 @@ License:
  Released under the GPL license
   http://www.gnu.org/copyleft/gpl.html
 
-  Copyright 2018 (email : webfood.info@gmail.com)
+  Copyright 2019 (email : webfood.info@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,6 +31,11 @@ License:
 */
 
 function kattene_func( $args, $content ) {
+
+  $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
+  wp_enqueue_style( 'kattene', $path . 'style.css');
+  do_action( 'kattene' );
+
   $content = str_replace("<br />", "", $content);
   $arr = json_decode($content,true);
   $sites = $arr["sites"];
@@ -57,23 +62,28 @@ function kattene_func( $args, $content ) {
       $num_class = "__five";
   endif;
 
+  global $kattene_no_target_blank;
+
+  if($kattene_no_target_blank){
+    $target_blank_str = "";
+  }else{
+    $target_blank_str = ' target="_blank" rel="noopener"';
+  }
+
   $str = '<div class="kattene">
-    <div class="kattene__imgpart"><a target="_blank" href="'.$main["url"].'"><img src="'.$arr["image"].'"></a></div>
+    <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.$main["url"].'"><img src="'.$arr["image"].'"></a></div>
     <div class="kattene__infopart">
-      <div class="kattene__title"><a target="_blank" href="'.$main["url"].'">'.$arr["title"].'</a></div>
+      <div class="kattene__title"><a'.$target_blank_str.' href="'.$main["url"].'">'.$arr["title"].'</a></div>
       <div class="kattene__description">'.$arr["description"].'</div>
       <div class="kattene__btns '.$num_class.'">';
 
   for( $i=0 ; $i<$cnt ; $i++ ){
-     $str .= '<div><a class="kattene__btn __'.$sites[$i]["color"].'" target="_blank" href="'.$sites[$i]["url"].'">'.$sites[$i]["label"].'</a></div>';
+     $str .= '<div><a class="kattene__btn __'.$sites[$i]["color"].'"'.$target_blank_str.' href="'.$sites[$i]["url"].'">'.$sites[$i]["label"].'</a></div>';
   }
 
   $str .= '</div></div></div>';
-  $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
-  wp_enqueue_style( 'kattene', $path . 'style.css');
 
   add_action( 'wp_footer', 'kattene_script' );
-  do_action( 'kattene' );
   return $str;
 }
 
@@ -111,3 +121,12 @@ function add_noscript_to_kattene( $tag, $handle ) {
 add_filter( 'style_loader_tag', 'add_noscript_to_kattene', 10, 2 );
 
 remove_filter('the_content', 'wptexturize');
+
+function kattene_custom(){
+  wp_enqueue_style( 'kattene-custom', get_stylesheet_directory_uri() . '/kattene-custom.css', array('kattene'));
+}
+
+function kattene_no_target_blank(){
+  global $kattene_no_target_blank;
+  $kattene_no_target_blank = true;
+}
