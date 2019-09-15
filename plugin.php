@@ -32,7 +32,7 @@ License:
 
 function kattene_func( $args, $content ) {
 
-  $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
+  $path = str_replace(site_url(),'',plugin_dir_url( __FILE__ ));
   wp_enqueue_style( 'kattene', $path . 'style.css');
   do_action( 'kattene' );
 
