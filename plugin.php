@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
-Version: 1.4
+Version: 1.5
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
