@@ -64,7 +64,7 @@ function kattene_func( $args, $content ) {
   $opt = array(
     'width'  => 160,
     'height' => 160,
-    'shadow' => false,
+    'shadow' => true,
     'no_target_blank' => false,
     'custom' => false
   );
