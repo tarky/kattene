@@ -14,14 +14,17 @@
   text-align: center; }
 
   .kattene__imgpart img {
+    margin: 0;
+    max-height: 160px;
+    width: auto;
+  }
+
+  .kattene__imgpart img.kattene__shadow {
     -webkit-box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
     -moz-box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
     box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
     -o-box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
     -ms-box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
-    margin: 0;
-    max-height: 160px;
-    width: auto;
   }
 
 .kattene__description {

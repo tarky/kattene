@@ -34,7 +34,6 @@ function kattene_func( $args, $content ) {
 
   $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
   wp_enqueue_style( 'kattene', $path . 'style.css');
-  do_action( 'kattene' );
 
   $content = str_replace("<br />", "", $content);
   $arr = json_decode($content,true);
@@ -62,27 +61,36 @@ function kattene_func( $args, $content ) {
       $num_class = "__five";
   endif;
 
-  global $kattene_no_target_blank;
+  $opt = array(
+    'width'  => 160,
+    'height' => 160,
+    'shadow' => true,
+    'no_target_blank' => false,
+    'custom' => false
+  );
+  $opt = apply_filters('kattene', $opt);
 
-  if($kattene_no_target_blank){
+  $args = kattene_convert_str_bool('shadow', $args);
+  $args = kattene_convert_str_bool('no_target_blank', $args);
+
+  $opt = array_merge($opt, $args);
+
+  $shadow_str = $opt['shadow'] ? 'class="kattene__shadow" ' : '';
+
+  if($opt['no_target_blank']){
     $target_blank_str = "";
   }else{
     $target_blank_str = ' target="_blank" rel="noopener"';
   }
 
-  global $kattene_lazyloading;
-
-  if($kattene_lazyloading){
-    if($arr['image_size']){
-      $kattene_lazyloading = array_merge($kattene_lazyloading, $arr['image_size']);
-    }
-    $lazyloading_str = ' width="'. $kattene_lazyloading['width'].'" height="'.$kattene_lazyloading['height'].'" loading="lazy"';
-  }else{
-    $lazyloading_str = '';
+  if($opt['custom']){
+    wp_enqueue_style( 'kattene-custom', get_stylesheet_directory_uri() . '/kattene-custom.css', array('kattene'));
   }
 
+  $lazyloading_str = ' width="'. $opt['width'].'" height="'.$opt['height'].'" loading="lazy"';
+
   $str = '<div class="kattene">
-    <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.$main["url"].'"><img' .$lazyloading_str. ' src="'.$arr["image"].'"></a></div>
+    <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.$main["url"].'"><img' .$lazyloading_str. ' src="'.$arr["image"].'" '.$shadow_str.'></a></div>
     <div class="kattene__infopart">
       <div class="kattene__title"><a'.$target_blank_str.' href="'.$main["url"].'">'.$arr["title"].'</a></div>
       <div class="kattene__description">'.$arr["description"].'</div>
@@ -133,19 +141,9 @@ add_filter( 'style_loader_tag', 'add_noscript_to_kattene', 10, 2 );
 
 remove_filter('the_content', 'wptexturize');
 
-function kattene_custom(){
-  wp_enqueue_style( 'kattene-custom', get_stylesheet_directory_uri() . '/kattene-custom.css', array('kattene'));
-}
-
-function kattene_no_target_blank(){
-  global $kattene_no_target_blank;
-  $kattene_no_target_blank = true;
-}
-
-function kattene_prepare_lazyloading($args){
-  global $kattene_lazyloading;
-  $kattene_lazyloading = wp_parse_args( $args, array (
-      'width'        =>  160,
-      'height'       =>  160
-  ));
+function kattene_convert_str_bool($key, $args){
+  if ( array_key_exists($key, $args) ) {
+    $args[$key] = ($args[$key] == 'false') ? false : true ;
+  }
+  return $args;
 }
