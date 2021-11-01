@@ -64,16 +64,17 @@ function kattene_func( $args, $content ) {
   $opt = array(
     'width'  => 160,
     'height' => 160,
-    'shadow' => true,
+    'shadow' => false,
     'no_target_blank' => false,
     'custom' => false
   );
   $opt = apply_filters('kattene', $opt);
 
-  $args = kattene_convert_str_bool('shadow', $args);
-  $args = kattene_convert_str_bool('no_target_blank', $args);
-
-  $opt = array_merge($opt, $args);
+  if(is_array($args)){
+    $args = kattene_convert_str_bool('shadow', $args);
+    $args = kattene_convert_str_bool('no_target_blank', $args);
+    $opt = array_merge($opt, $args);
+  }
 
   $shadow_str = $opt['shadow'] ? 'class="kattene__shadow" ' : '';
 
