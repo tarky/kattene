@@ -31,8 +31,7 @@ License:
 */
 
 function kattene_func( $args, $content ) {
-
-  $path = str_replace(home_url(),'',plugin_dir_url( __FILE__ ));
+  $path = plugin_dir_url( __FILE__ );
   wp_enqueue_style( 'kattene', $path . 'style.css');
 
   $content = str_replace("<br />", "", $content);
