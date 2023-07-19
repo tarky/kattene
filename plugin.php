@@ -44,7 +44,11 @@ function kattene_func( $args, $content ) {
     }
   );
 
-  $main = array_pop($main_tmp);
+  if(empty($main_tmp)){
+    $main = $sites[0];
+  }else{
+    $main = array_shift($main_tmp);
+  }
 
   $cnt = count($sites);
 
