@@ -40,7 +40,7 @@ function kattene_func( $args, $content ) {
 
   $main_tmp = array_filter($sites,
     function($site){
-      return $site["main"];
+      return isset($site["main"]) && $site["main"];
     }
   );
 
