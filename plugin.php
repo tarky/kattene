@@ -94,14 +94,14 @@ function kattene_func( $args, $content ) {
   $lazyloading_str = ' width="'. $opt['width'].'" height="'.$opt['height'].'" loading="lazy"';
 
   $str = '<div class="kattene">
-    <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.$main["url"].'"><img' .$lazyloading_str. ' src="'.$arr["image"].'" '.$shadow_str.'></a></div>
+    <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'"><img' .$lazyloading_str. ' src="'.kattene_esc($arr["image"]).'" '.$shadow_str.'></a></div>
     <div class="kattene__infopart">
-      <div class="kattene__title"><a'.$target_blank_str.' href="'.$main["url"].'">'.$arr["title"].'</a></div>
+      <div class="kattene__title"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'">'.$arr["title"].'</a></div>
       <div class="kattene__description">'.$arr["description"].'</div>
       <div class="kattene__btns '.$num_class.'">';
 
   for( $i=0 ; $i<$cnt ; $i++ ){
-     $str .= '<div><a class="kattene__btn __'.$sites[$i]["color"].'"'.$target_blank_str.' href="'.$sites[$i]["url"].'">'.$sites[$i]["label"].'</a></div>';
+     $str .= '<div><a class="kattene__btn __'.kattene_esc($sites[$i]["color"]).'"'.$target_blank_str.' href="'.kattene_esc($sites[$i]["url"]).'">'.$sites[$i]["label"].'</a></div>';
   }
 
   $str .= '</div></div></div>';
@@ -150,4 +150,14 @@ function kattene_convert_str_bool($key, $args){
     $args[$key] = ($args[$key] == 'false') ? false : true ;
   }
   return $args;
+}
+
+function kattene_esc($s){
+  $s=esc_attr($s);
+  $s=str_replace('http:','http<',$s);
+  $s=str_replace('https:','https<',$s);
+  $s=str_replace(':','',$s);
+  $s=str_replace('http<','http:',$s);
+  $s=str_replace('https<','https:',$s);
+  return $s;
 }
