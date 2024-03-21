@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
-Version: 1.7
+Version: 1.8
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -91,17 +91,17 @@ function kattene_func( $args, $content ) {
     wp_enqueue_style( 'kattene-custom', get_stylesheet_directory_uri() . '/kattene-custom.css', array('kattene'));
   }
 
-  $lazyloading_str = ' width="'. $opt['width'].'" height="'.$opt['height'].'" loading="lazy"';
-
   $str = '<div class="kattene">
-    <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'"><img' .$lazyloading_str. ' src="'.kattene_esc($arr["image"]).'" '.$shadow_str.'></a></div>
+    <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'">'
+    .'<img width="'.kattene_esc($opt['width']).'" height="'.kattene_esc($opt['height']).'" loading="lazy" src="'.kattene_esc($arr["image"]).'" '.$shadow_str.'>'
+    .'</a></div>
     <div class="kattene__infopart">
-      <div class="kattene__title"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'">'.$arr["title"].'</a></div>
-      <div class="kattene__description">'.$arr["description"].'</div>
+      <div class="kattene__title"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'">'.kattene_esc($arr["title"]).'</a></div>
+      <div class="kattene__description">'.kattene_esc($arr["description"]).'</div>
       <div class="kattene__btns '.$num_class.'">';
 
   for( $i=0 ; $i<$cnt ; $i++ ){
-     $str .= '<div><a class="kattene__btn __'.kattene_esc($sites[$i]["color"]).'"'.$target_blank_str.' href="'.kattene_esc($sites[$i]["url"]).'">'.$sites[$i]["label"].'</a></div>';
+     $str .= '<div><a class="kattene__btn __'.kattene_esc($sites[$i]["color"]).'"'.$target_blank_str.' href="'.kattene_esc($sites[$i]["url"]).'">'.kattene_esc($sites[$i]["label"]).'</a></div>';
   }
 
   $str .= '</div></div></div>';
