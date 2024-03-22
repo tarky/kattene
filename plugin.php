@@ -31,12 +31,36 @@ License:
 */
 
 function kattene_func( $args, $content ) {
-  $path = plugin_dir_url( __FILE__ );
-  wp_enqueue_style( 'kattene', $path . 'style.css');
+  $opt = array(
+    'width'  => 160,
+    'height' => 160,
+    'shadow' => true,
+    'no_target_blank' => false,
+    'custom' => false,
+    'mercari_tool' => 'kattene'
+  );
+  $opt = apply_filters('kattene', $opt);
+
+  if(is_array($args)){
+    $args = kattene_convert_str_bool('shadow', $args);
+    $args = kattene_convert_str_bool('no_target_blank', $args);
+    $opt = array_merge($opt, $args);
+  }
+
+  $style_path = dirname(__FILE__)."/style.css";
+  $style_url = plugin_dir_url( __FILE__ ). 'style.css';
+  wp_enqueue_style( 'kattene', $style_url, array(), date('YmdGis', filemtime($style_path)));
 
   $content = str_replace("<br />", "", $content);
   $arr = json_decode($content,true);
   $sites = $arr["sites"];
+  
+  foreach($sites as &$site){
+    if(strpos($site["url"],'mercari.com') && strpos($site["url"],'?afid=')){
+      $site["url"] = $site["url"].'&utm_source='.$opt['mercari_tool'];
+    }
+  }
+  unset($site);
 
   $main_tmp = array_filter($sites,
     function($site){
@@ -64,28 +88,9 @@ function kattene_func( $args, $content ) {
       $num_class = "__five";
   endif;
 
-  $opt = array(
-    'width'  => 160,
-    'height' => 160,
-    'shadow' => true,
-    'no_target_blank' => false,
-    'custom' => false
-  );
-  $opt = apply_filters('kattene', $opt);
-
-  if(is_array($args)){
-    $args = kattene_convert_str_bool('shadow', $args);
-    $args = kattene_convert_str_bool('no_target_blank', $args);
-    $opt = array_merge($opt, $args);
-  }
-
   $shadow_str = $opt['shadow'] ? 'class="kattene__shadow" ' : '';
 
-  if($opt['no_target_blank']){
-    $target_blank_str = "";
-  }else{
-    $target_blank_str = ' target="_blank" rel="noopener"';
-  }
+  $target_blank_str = $opt['no_target_blank'] ? '' : ' target="_blank" rel="noopener"';
 
   if($opt['custom']){
     wp_enqueue_style( 'kattene-custom', get_stylesheet_directory_uri() . '/kattene-custom.css', array('kattene'));
@@ -100,8 +105,8 @@ function kattene_func( $args, $content ) {
       <div class="kattene__description">'.kattene_esc($arr["description"]).'</div>
       <div class="kattene__btns '.$num_class.'">';
 
-  for( $i=0 ; $i<$cnt ; $i++ ){
-     $str .= '<div><a class="kattene__btn __'.kattene_esc($sites[$i]["color"]).'"'.$target_blank_str.' href="'.kattene_esc($sites[$i]["url"]).'">'.kattene_esc($sites[$i]["label"]).'</a></div>';
+  foreach($sites as $site){
+    $str .= '<div><a class="kattene__btn __'.kattene_esc($site["color"]).'"'.$target_blank_str.' href="'.kattene_esc($site["url"]).'">'.kattene_esc($site["label"]).'</a></div>';
   }
 
   $str .= '</div></div></div>';

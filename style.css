@@ -280,3 +280,25 @@
       vertical-align: middle;
       font-size: 1.2em;
       margin-right: 0.2em; }
+
+.kattene__btn.__mred {
+  background-color: #ff0211;
+  -webkit-box-shadow: 0 5px 0 #c4373f;
+  -moz-box-shadow: 0 5px 0 #c4373f;
+  box-shadow: 0 5px 0 #c4373f;
+  -o-box-shadow: 0 5px 0 #c4373f;
+  -ms-box-shadow: 0 5px 0 #c4373f;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  text-align: center; }
+
+  .kattene__btn.__mred:hover {
+    background-color: #c4373f; }
+
+  .kattene__btn.__mred i {
+    font-weight: bold; }
+
+    .kattene__btn.__mred i:before {
+      vertical-align: middle;
+      font-size: 1.2em;
+      margin-right: 0.2em; }
