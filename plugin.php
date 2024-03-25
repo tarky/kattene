@@ -47,9 +47,12 @@ function kattene_func( $args, $content ) {
     $opt = array_merge($opt, $args);
   }
 
-  $style_path = dirname(__FILE__)."/style.css";
-  $style_url = plugin_dir_url( __FILE__ ). 'style.css';
-  wp_enqueue_style( 'kattene', $style_url, array(), date('YmdGis', filemtime($style_path)));
+  global $wp_styles;
+  if(!in_array("kattene", $wp_styles->queue)){
+    $style_path = dirname(__FILE__)."/style.css";
+    $style_url = plugin_dir_url( __FILE__ ). 'style.css';
+    wp_enqueue_style( 'kattene', $style_url, array(), date('YmdGis', filemtime($style_path)));
+  }
 
   $content = str_replace("<br />", "", $content);
   $arr = json_decode($content,true);
