@@ -48,10 +48,19 @@ function kattene_func( $args, $content ) {
   }
 
   global $wp_styles;
+  
   if(!in_array("kattene", $wp_styles->queue)){
     $style_path = dirname(__FILE__)."/style.css";
     $style_url = plugin_dir_url( __FILE__ ). 'style.css';
     wp_enqueue_style( 'kattene', $style_url, array(), date('YmdGis', filemtime($style_path)));
+  }
+
+  if($opt['custom']){
+    if(!in_array("kattene-custom", $wp_styles->queue)){
+      $custom_style_path =  get_stylesheet_directory() . '/kattene-custom.css';
+      $custom_style_url = get_stylesheet_directory_uri().  '/kattene-custom.css';
+      wp_enqueue_style( 'kattene-custom', $custom_style_url, array('kattene'), date('YmdGis', filemtime($custom_style_path)));
+    }
   }
 
   $content = str_replace("<br />", "", $content);
@@ -94,10 +103,6 @@ function kattene_func( $args, $content ) {
   $shadow_str = $opt['shadow'] ? 'class="kattene__shadow" ' : '';
 
   $target_blank_str = $opt['no_target_blank'] ? '' : ' target="_blank" rel="noopener"';
-
-  if($opt['custom']){
-    wp_enqueue_style( 'kattene-custom', get_stylesheet_directory_uri() . '/kattene-custom.css', array('kattene'));
-  }
 
   $str = '<div class="kattene">
     <div class="kattene__imgpart"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'">'
