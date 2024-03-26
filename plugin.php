@@ -4,7 +4,7 @@ Plugin Name: Kattene
 Author: webfood
 Plugin URI: http://webfood.info/make-kattene/
 Description: kattene.
-Version: 2.0
+Version: 2.1
 Author URI: http://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
@@ -68,7 +68,7 @@ function kattene_func( $args, $content ) {
   $sites = $arr["sites"];
   
   foreach($sites as &$site){
-    if(strpos($site["url"],'mercari.com') && strpos($site["url"],'?afid=')){
+    if(strpos($site["url"],'mercari.com') && strpos($site["url"],'afid=') && !strpos($site["url"],'utm_source='.$opt['mercari_tool'])){
       $site["url"] = $site["url"].'&utm_source='.$opt['mercari_tool'];
     }
   }
