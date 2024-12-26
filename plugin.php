@@ -110,7 +110,20 @@ function kattene_func( $args, $content ) {
     .'</a></div>
     <div class="kattene__infopart">
       <div class="kattene__title"><a'.$target_blank_str.' href="'.kattene_esc($main["url"]).'">'.kattene_esc($arr["title"]).'</a></div>
-      <div class="kattene__description">'.kattene_esc($arr["description"]).'</div>
+      <div class="kattene__description">';
+      
+  if(is_array($arr["description"])){
+    foreach($arr["description"] as $i => $description){
+      if($i >= 1){
+        $str .= "<br/>";
+      }
+      $str .= kattene_esc($description);
+    }
+  }else{
+    $str .= kattene_esc($arr["description"]);
+  }
+  
+  $str .= '</div>
       <div class="kattene__btns '.$num_class.'">';
 
   foreach($sites as $site){
