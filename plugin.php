@@ -34,7 +34,7 @@ function kattene_func( $args, $content ) {
   $opt = array(
     'width'  => 160,
     'height' => 160,
-    'shadow' => true,
+    'shadow' => false,
     'no_target_blank' => false,
     'custom' => false,
     'mercari_tool' => 'kattene'
