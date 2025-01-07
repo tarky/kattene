@@ -36,8 +36,7 @@ function kattene_func( $args, $content ) {
     'height' => 160,
     'shadow' => false,
     'no_target_blank' => false,
-    'custom' => false,
-    'mercari_tool' => 'kattene'
+    'custom' => false
   );
   $opt = apply_filters('kattene', $opt);
 
@@ -67,13 +66,6 @@ function kattene_func( $args, $content ) {
   $arr = json_decode($content,true);
   $sites = $arr["sites"];
   
-  foreach($sites as &$site){
-    if(strpos($site["url"],'mercari.com') && strpos($site["url"],'afid=') && !strpos($site["url"],'utm_source='.$opt['mercari_tool'])){
-      $site["url"] = $site["url"].'&utm_source='.$opt['mercari_tool'];
-    }
-  }
-  unset($site);
-
   $main_tmp = array_filter($sites,
     function($site){
       return isset($site["main"]) && $site["main"];
