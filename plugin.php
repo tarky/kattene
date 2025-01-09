@@ -2,10 +2,10 @@
 /*
 Plugin Name: Kattene
 Author: webfood
-Plugin URI: http://webfood.info/make-kattene/
+Plugin URI: https://webfood.info/make-kattene/
 Description: kattene.
 Version: 2.2
-Author URI: http://webfood.info/
+Author URI: https://webfood.info/
 Text Domain: kattene
 Domain Path: /languages
 
@@ -13,7 +13,7 @@ License:
  Released under the GPL license
   http://www.gnu.org/copyleft/gpl.html
 
-  Copyright 2019 (email : webfood.info@gmail.com)
+  Copyright 2025 (email : webfood.info@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
